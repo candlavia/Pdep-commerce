@@ -6,13 +6,13 @@ type Producto = (NombreDelProducto, PrecioDelProducto, DiaDeEntrega)
 
 -- funciones para las tuplas
 tomarNombre:: Producto-> NombreDelProducto
-tomarNombre producto= nombreDelProducto
+tomarNombre (nombreDelProducto,_, _)= nombreDelProducto
 
 tomarPrecio:: Producto->PrecioDelProducto
-tomarPrecio producto=precioDelProducto
+tomarPrecio (_, precioDelProducto, _)= precioDelProducto
 
 tomarDiaDeEntrega:: Producto->DiaDeEntrega
-tomarDiaDeEntrega producto= diaDeEntrega
+tomarDiaDeEntrega (_, _, diaDeEntrega)= diaDeEntrega
 
 hacerProducto :: String->Float->String->Producto
 hacerProducto nombre precio dia=(nombre, precio, dia) 
@@ -34,7 +34,7 @@ descodiciarProducto:: Producto->Producto
 descodiciarProducto producto= hacerProducto ((take 10).tomarNombre $producto) (tomarPrecio producto) (tomarDiaDeEntrega producto)
 
 productoDeLujo:: Producto->Bool
-productoDeLujo producto= elem x (tomarNombre producto) || elem z (tomarNombre producto)
+productoDeLujo producto= elem 'x' (tomarNombre producto) || elem 'z' (tomarNombre producto)
 
 productoCodiciado::Producto->Bool
 productoCodiciado producto= (tomarNombre producto) >10
